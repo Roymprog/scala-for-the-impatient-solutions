@@ -1,0 +1,6 @@
+The ConsoleLogger trait has a new field added, which has to be injected into classes that mix in this trait. In order
+for this to happen, all classes that mix in the trait have to be recompiled. Under the hood, the constructor of the
+SavingsAccount class calls the $init$ method on the ConsoleLogger trait. After addition of the field and recompilation
+of the file, the trait now expects a setter method "$_setter_$prepended_$eq" on the SavingsAccount class. If this class
+would be recompiled, this method would be there, but SavingsAccount is not recompiled, so the method is not there and an
+error is thrown explaining the method is abstract i.e. not implemented.

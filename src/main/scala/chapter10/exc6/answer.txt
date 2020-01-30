@@ -1,0 +1,6 @@
+In order to leverage the benefits of the composite pattern, JContainer has to extend JComponent, but in order to also
+use the Java AWT Component class features it also has to extend Container. It is not possible to extend multiple classes
+in Java, so the designers of Swing choose to make JComponent extend Container, and let JContainer extend JComponent.
+In Scala it would be possible to implement JComponent as a trait and let "JContainer extend Container with JComponent",
+thereby leveraging the functionality of both the Java AWT class and the JComponent trait. Or you could reimplement
+Container as a Scala trait as well to mix in both traits for more flexibility.

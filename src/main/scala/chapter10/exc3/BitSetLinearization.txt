@@ -1,0 +1,50 @@
+BitSet >>
+    (BitSetLike >>
+        (SortedSetLike >>
+            (SetLike >>
+                (Parallelizable >> Any) >>
+                (Subtractable >> AnyRef) >>
+                (GenSetLike >>
+                    (Parallelizable >> Any) >>
+                    Equals >>
+                    (A) ⇒ Boolean >>
+                    (GenIterableLike >> GenTraversableLike)) >>
+                (IterableLike >>
+                    (GenIterableLike >> GenTraversableLike) >>
+                    (TraversableLike >>
+                        (Parallelizable >> Any) >>
+                        (GenTraversableLike >> ParIterable >> Parallelizable >> GenTraversableOnce) >>
+                        (TraversableOnce >> GenTraversableOnce) >>
+                        FilterMonadic >>
+                        HasNewBuilder) >>
+                    Equals)) >>
+                (Sorted >> AnyRef)
+        )
+    ) >>
+    (SortedSet >>
+        SortedSetLike >>
+        (Set >>
+            SetLike >>
+            GenericSetTemplate >>
+            (GenSet >>
+                (GenericSetTemplate >> GenericTraversableTempolate) >>
+                GenIterable >>
+                GenSetLike) >>
+            (Iterable >>
+                IterableLike >>
+                GenericTraversableTemplate >>
+                (GenIterable >>
+                    GenericTraversableTemplate >>
+                    GenTraversable >>
+                    GenIterableLike) >>
+                (Traversable >>
+                    (GenericTraversableTemplate >> HasNewBuilder) >>
+                    TraversableOnce >>
+                    (GenTraversable >>
+                        GenericTraversableTemplate >>
+                        GenTraversableOnce >>
+                        GenTraversableLike) >>
+                    TraversableLike)) >>
+            (A) ⇒ Boolean
+        )
+    )
