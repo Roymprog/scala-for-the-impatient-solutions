@@ -1,0 +1,2 @@
+ Run in REPL:
+ java.util.TimeZone.getAvailableIDs.groupBy(_.takeWhile(c => c != '/')).foldLeft("",Array[String]())((max, kv) => if (kv._2.length > max._2.length) kv else max)._1
