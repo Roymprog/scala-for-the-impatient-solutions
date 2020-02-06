@@ -1,0 +1,3 @@
+This is a text that will be read
+It contains multiple lines
+And will be read into a String
