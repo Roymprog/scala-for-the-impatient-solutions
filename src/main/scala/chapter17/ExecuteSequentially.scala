@@ -2,6 +2,7 @@ package chapter17
 
 import scala.annotation.tailrec
 import scala.concurrent.Future
+import scala.util.matching.Regex
 
 object ExecuteSequentially {
   import scala.concurrent.ExecutionContext.Implicits.global
@@ -41,14 +42,56 @@ object ExecuteSequentially {
   * NOTE: The action is made callable in order to re-use reading from input
   * */
   def repeat[T] (action: () => T, until: T => Boolean): Future[T] = {
-    @tailrec def doActionUntil() :T = {
+    @tailrec def actUntil() :T = {
       val res = action()
       if (until(res)) res
-      else doActionUntil()
+      else actUntil()
     }
 
     Future[T] {
-      doActionUntil()
+      actUntil()
     }
+  }
+
+  /*
+ * Ex7
+ * */
+  def countPrimes(n: BigInt) : Future[Int] = {
+    val cores = Runtime.getRuntime.availableProcessors
+
+
+    val isPrime = (bigInts :Seq[BigInt]) => Future {
+      bigInts.count(b => b.isProbablePrime(1))
+    }
+
+    val groups = (BigInt(1) until n).grouped(cores)
+
+    val futureCount = Future.traverse(groups)(isPrime)
+    for (count <- futureCount)
+      yield count.sum
+  }
+
+  /*
+  * Ex8
+  * */
+  def visitUrlsOnPage() : Future[Seq[String]] = {
+    import scalaj.http.Http
+
+    val pageUrl = Future {
+      scala.io.StdIn.readLine("Enter URL to visit: ")
+    }
+
+    val visit = (url:String) => Future {
+      Http(url).asString.body
+    }
+
+    val hyperLinkRegex = new Regex(""""(https?:\/\/)\w+\.(\w+\.)*(org|nl|com)(\/\w+)*""")
+
+    val hyperLinks = (body:String) => Future {
+      hyperLinkRegex.findAllIn(body).toSeq
+    }
+
+    for(page <- pageUrl; visited <- visit(page); links <- hyperLinks(visited))
+      yield links
   }
 }
