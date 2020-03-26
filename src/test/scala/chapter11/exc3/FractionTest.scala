@@ -30,6 +30,7 @@ class FractionTest extends FlatSpec with Matchers {
     val f2 = Fraction(2,6)
 
     f1-f2 shouldBe Fraction(-2,9)
+    f2-f1 shouldBe Fraction(2,9)
   }
 
   "Fraction division " should "return 3/4" in {

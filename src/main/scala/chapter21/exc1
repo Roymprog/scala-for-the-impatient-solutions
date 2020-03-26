@@ -1,0 +1,8 @@
+In the scala.Predef package object there exists an implicit conversion from Any to ArrowAssoc.
+ArrowAssoc is an implicit class, so any object can implicitly be converted to an ArrowAssoc.
+The -> method in the ArrowAssoc class returns a tuple of the implicitly converted value with
+the method argument. This results in:
+
+"Hello" -> 42 == ("Hello", 42)
+42 -> "Hello" == (42, "Hello")
+42 -> "Hello" == (42, "Hello")
