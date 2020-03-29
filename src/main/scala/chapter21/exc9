@@ -1,0 +1,20 @@
+Because the Ordered trait defines a method:
+
+abstract def compare(that: T): Int
+
+This method defines how an instance of a given class, T, extending Ordered[T] compares
+to an instance of the same class T. This allows you to define only one way to compare
+objects of a class. If you want multiple ways you would have to extend the Ordered[T]
+type for each possible comparison.
+
+The Ordering trait defines a method:
+
+abstract def compare(x: T, y: T): Int
+
+This method describes how two instances of a given class, T, can be compared. This is a
+slight nuance, but allows much flexibility. This allows for multiple ways of comparing
+objects of a given class without subtyping through implicit conversions. We can define
+multiple ordering algorithms. By implicitly importing a particular way of ordering
+in different situations, we can use ordering on a particular type without having to
+explicitly create instances of a particular subclass with a particular ordering.
+Thereby, we omit having to subclass and making code more generic.
